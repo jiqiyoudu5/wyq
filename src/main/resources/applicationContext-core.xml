@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="  
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- 读取属性配置文件 -->
+	<context:property-placeholder location="classpath:config/conf.properties" />
+
+	<!-- 注解 -->
+	<!-- <context:annotation-config /> -->
+
+	<!-- 配置数据源 方法1 -->
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"> 
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"> </property> 
+		<property name="url" value="jdbc:mysql://localhost:3306/sh_test"> </property> 
+		<property name="username" value="root"></property> <property name="password" 
+		value="123"></property> </bean> -->
+
+	<!-- 配置数据源 方法2 -->
+	<!-- 定义使用C3P0连接池的数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- 指定连接数据库的JDBC驱动 -->
+		<property name="driverClass">
+			<value>com.mysql.jdbc.Driver</value>
+		</property>
+		<!-- 连接数据库所用的URL -->
+		<property name="jdbcUrl"
+			value="jdbc:mysql://${sys.db.jdbcUrlDB}?useUnicode=true&amp;characterEncoding=gb2312"></property>
+		<!-- 连接数据库的用户名 -->
+		<property name="user">
+			<value>${sys.db.user}</value>
+		</property>
+		<!-- 连接数据库的密码 -->
+		<property name="password">
+			<value>${sys.db.password}</value>
+		</property>
+		<!-- 设置数据库连接池的最大连接数 -->
+		<property name="maxPoolSize">
+			<value>${sys.db.maxPoolSize}</value>
+		</property>
+		<!-- 设置数据库连接池的最小连接数 -->
+		<property name="minPoolSize">
+			<value>2</value>
+		</property>
+		<!-- 设置数据库连接池的初始化连接数 -->
+		<property name="initialPoolSize">
+			<value>3</value>
+		</property>
+		<!-- 设置数据库连接池的连接的最大空闲时间,单位为秒 -->
+		<property name="maxIdleTime">
+			<value>20</value>
+		</property>
+		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。Default: 3 -->
+		<!-- <property name="acquireIncrement" value="5" /> -->
+		<!--每60秒检查所有连接池中的空闲连接。Default: 0 -->
+		<!-- <property name="idleConnectionTestPeriod" value="60" /> -->
+	</bean>
+
+	<!-- 配置Oracle数据源 -->
+	<!-- <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" 
+		destroy-method="close"> <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" 
+		/> <property name="url" value="jdbc:oracle:thin:@169.254.3.121:1521:xjga" 
+		/> <property name="username" value="xjga" /> <property name="password" value="XJGA" 
+		/> <property name="initialSize" value="50" /> <property name="maxActive" 
+		value="550" /> </bean> -->
+	<!-- 数据源配置完毕 -->
+
+	<!-- 配置Hibernate的SessionFactory -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<!-- 设置Hibernate的相关属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- 设置Hibernate的数据库方言 -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- HQL解析器 -->
+				<!-- <prop key="hibernate.query.factory_class">org.hibernate.hql.internal.ast.ASTQueryTranslatorFactory</prop> -->
+				<!-- 设置Hibernate是否在控制台输出SQL语句，开发调试阶段通常设为true -->
+				<prop key="hibernate.show_sql">false</prop>
+				<!-- 输出格式化后的SQL语句 -->
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- 设置Hibernate一个提交批次中的最大SQL语句数 -->
+				<prop key="hibernate.jdbc.batch_size">50</prop>
+			</props>
+		</property>
+		<!-- <property name="annotatedClasses"> <list><value>cn.com.fri.po.person</value></list> 
+			</property> -->
+		<!-- 自动扫描加载Entity，省去annotatedClasses逐个配置 -->
+		<property name="packagesToScan" value="cn.com.fri.**.po" />
+	</bean>
+
+	<!--定义Hibernate的事务管理器HibernateTransactionManager -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- 使用annotation定义事务(事物管理方法1,此时通过注解直接在方法上加事物管理(@Transactional) -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 使用XML定义事务(事物管理方法2,通过XML限定方法上加限定事物管理 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="find*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="get*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="load*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="exists*" propagation="REQUIRED" read-only="true" />
+			<tx:method name="update*" propagation="REQUIRED" />
+			<tx:method name="delete*" propagation="REQUIRED" />
+			<tx:method name="save*" propagation="REQUIRED" />
+			<tx:method name="doSQL*" propagation="REQUIRED" />
+			<tx:method name="back*" propagation="REQUIRED" />
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- 使用CGLIB代理和@AspectJ自动代理支持 -->
+	<aop:config proxy-target-class="true" />
+	<aop:config>
+		<aop:pointcut id="allBizMethod"
+			expression="execution(* cn.com.fri.*.biz.impl.*.*(..))" />
+		<aop:advisor pointcut-ref="allBizMethod" advice-ref="txAdvice" />
+	</aop:config>
+
+	<!-- 开启基于@AspectJ切面的注解处理器 -->
+	<!-- <aop:aspectj-autoproxy /> -->
+
+	<!-- 开启Spring自动扫描标注有@Repository的DAO组件、@Service的BIZ組件,@Controller组件在springmvc中扫描, 
+		此时以提供annotation(注解)功能故可以去掉开启注解配置 -->
+	<context:component-scan base-package="cn.com.fri">
+		<context:include-filter type="regex"
+			expression=".impl.*" />
+	</context:component-scan>
+
+	<!-- SpringMessage国际化 -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:config/messages" />
+		<property name="fileEncodings" value="utf-8" />
+		<property name="cacheSeconds" value="120" />
+	</bean>
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+
+</beans>
