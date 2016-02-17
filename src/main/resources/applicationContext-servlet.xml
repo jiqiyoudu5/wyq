@@ -13,7 +13,7 @@
     http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
 
 	<!-- 读取属性配置文件 -->
-	<context:property-placeholder location="classpath:config/conf.properties" />
+	<context:property-placeholder location="classpath:conf.properties" />
 
 	<!-- 开启扫描controller结尾文件 -->
 	<context:component-scan base-package="cn.com.**.controller" />

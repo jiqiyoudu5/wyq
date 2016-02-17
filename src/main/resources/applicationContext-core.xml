@@ -9,7 +9,7 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
 	<!-- 读取属性配置文件 -->
-	<context:property-placeholder location="classpath:config/conf.properties" />
+	<context:property-placeholder location="classpath:conf.properties" />
 
 	<!-- 注解 -->
 	<!-- <context:annotation-config /> -->
@@ -145,7 +145,7 @@
 	<!-- SpringMessage国际化 -->
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<property name="basename" value="classpath:config/messages" />
+		<property name="basename" value="classpath:messages" />
 		<property name="fileEncodings" value="utf-8" />
 		<property name="cacheSeconds" value="120" />
 	</bean>

@@ -1,0 +1,40 @@
+@charset "utf-8";
+li,ul{ margin:0px; padding:0px;list-style: none outside none;}
+.logo_bann{
+	height:85px;
+	width:100%;
+	position:absolute;
+	margin:0px; 
+	padding:0px;
+}
+.logo{
+	height:85px;
+	line-height:85px;
+	padding:0px;
+	width:30%;
+	float:left
+}
+.logo_c{
+	height:85px;
+	line-height:85px;
+	padding:0px;
+	width:40%;
+	float:left
+}
+.logo_nav{
+	height:67px;
+	line-height:85px;
+	width:30%;
+	float:left;
+	padding-top: 18px;
+}
+.logo_nav li{
+	float: right;
+	width: auto;
+	padding-right: 20px;
+	line-height:85px;
+	font-size:18px;
+	font-weight:bold;
+	font-size: 15px;
+}
+.logo_nav li a{ color:#090909;text-decoration: none;}

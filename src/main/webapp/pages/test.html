@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>测试：城市选择</title>
+<script type="text/javascript"
+	src="../resources/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	function loadInfo(id) {
+		$.getJSON("../sys/dictionary/tree/ajax/" + id, function(data) {
+			$("#info").html("");
+			$.each(data, function(i, item) {
+				$("#info").append(
+						"<li><a href='javascript:void(0);' onclick='loadInfo2("
+								+ item.id + ")'>" + item.text + "</a></li>");
+			});
+		});
+	}
+
+	function loadInfo2(id) {
+		$.getJSON("../sys/dictionary/tree/ajax/" + id, function(data) {
+			$("#info2").html("");
+			$("#info3").html("");
+			$.each(data, function(i, item) {
+				$("#info2").append(
+						"<li><a href='javascript:void(0);' onclick='loadInfo3("
+								+ item.id + ")'>" + item.text + "</a></li>");
+			});
+		});
+	}
+
+	function loadInfo3(id) {
+		$.getJSON("../sys/dictionary/tree/ajax/" + id, function(data) {
+			$("#info3").html("");
+			$("#info4").html("");
+			$.each(data, function(i, item) {
+				$("#info3").append(
+						"<li><a href='javascript:void(0);' onclick='loadInfo4("
+								+ item.id + ")'>" + item.text + "</a></li>");
+			});
+		});
+	}
+
+	function loadInfo4(id) {
+		$.getJSON("../sys/dictionary/tree/ajax/" + id, function(data) {
+			$("#info4").html("");
+			$.each(data, function(i, item) {
+				$("#info4").append(
+						"<li><a href='javascript:void(0);' onclick='loadInfo4("
+								+ item.id + ")'>" + item.text + "</a></li>");
+			});
+		});
+	}
+</script>
+<style type="text/css">
+.selectcity {
+	width: 768px;
+	margin: 0 auto;
+	padding-bottom: 10px;
+	position: relative
+}
+
+.selectcity ul.selectcity-province {
+	width: 660px;
+	padding: 10px 0 0 8px;
+	overflow: hidden;
+	_display: inline-block;
+}
+
+.selectcity ul.selectcity-province li {
+	width: 100px;
+	height: 22px;
+	float: left;
+	white-space: nowrap;
+	list-style-type: none;
+}
+
+.selectcity ul.selectcity-province li a,.selectcity ul.selectcity-province li span
+	{
+	display: inline-block;
+	padding: 0 3px;
+	white-space: nowrap;
+	text-decoration: none;
+}
+
+.selectcity ul.selectcity-province li span.fontbgrey {
+	color: #666;
+	cursor: default
+}
+
+</style>
+</head>
+<body onload="loadInfo('402883e04a08d5a4014a08da982e0000')">
+
+
+	<div class="selectcity">
+		<ul id="info" class="selectcity-province fn-clear"></ul>
+	</div>
+	<div class="selectcity">
+		<ul id="info2" class="selectcity-province fn-clear"></ul>
+	</div>
+	<div class="selectcity">
+		<ul id="info3" class="selectcity-province fn-clear"></ul>
+	</div>
+	<div class="selectcity">
+		<ul id="info4" class="selectcity-province fn-clear"></ul>
+	</div>
+
+</body>
+</html>

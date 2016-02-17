@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>TrimPath学习测试</title>
+<script type="text/javascript"
+	src="../resources/js/jquery-1.11.1.min.js"></script>
+<script src="../resources/js/template.js" type="text/javascript"></script>
+<style type="text/css">
+.selectcity {
+	width: 768px;
+	margin: 0 auto;
+	padding-bottom: 10px;
+	position: relative
+}
+
+.selectcity ul.selectcity-province {
+	width: 660px;
+	padding: 10px 0 0 8px;
+	overflow: hidden;
+	_display: inline-block;
+}
+
+.selectcity ul.selectcity-province li {
+	width: 100px;
+	height: 22px;
+	float: left;
+	white-space: nowrap;
+	list-style-type: none;
+}
+
+.selectcity ul.selectcity-province li a,.selectcity ul.selectcity-province li span
+	{
+	display: inline-block;
+	padding: 0 3px;
+	white-space: nowrap
+}
+
+.selectcity ul.selectcity-province li span.fontbgrey {
+	color: #666;
+	cursor: default
+}
+</style>
+</head>
+
+<body onload="loadInfo('402883e04a08d5a4014a08da982e0000')">
+	<input type="button" value="选择城市："
+		onclick="loadInfo('402883e04a08d5a4014a08da982e0000')" />
+	<div id="ShowDiv"></div>
+	<textarea id="temp" style="display: none;"> 
+　　　　<div class="selectcity">
+		<ul id="info" class="selectcity-province fn-clear">
+		{for i in data}
+		<li>
+		<a href='javascript:void(0);'
+					onclick="loadInfo2('402883e04a08d5a4014a08da982e0000')">
+		${i.text}
+		</a>
+		</li>
+		{/for}
+		</ul>
+	</div>
+　　</textarea>
+</body>
+</html>
+<script language="javascript">
+var data;
+　　function loadInfo(id) {
+	$.getJSON("../sys/dictionary/tree/ajax/" + id, function(response) {
+		data=response;
+		var result = TrimPath.processDOMTemplate("temp", data);
+		$("#ShowDiv").append(result)
+	});
+
+}
+</script>
