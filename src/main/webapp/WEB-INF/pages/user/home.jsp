@@ -79,7 +79,7 @@
 		$("#username").append(CURRENT_USER.username);
 		
 		//加载用户菜单、logo
-		$.getJSON("<%=basePath%>user/menu/byuserlinefindlist", function(data) {
+		$.getJSON("<%=basePath%>user/start/loadmenu/byuser", function(data) {
 			//logo
 			var src ="sys/file/img/"+data.logourl;
 			$("#user_logo").attr("src",src);

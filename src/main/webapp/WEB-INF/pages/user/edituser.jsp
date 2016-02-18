@@ -30,7 +30,7 @@ $(function(){
     
     <div class="itab">
   	<ul> 
-    <li class="selected"><a href="<%=basePath%>headphoto" target="tabFrame">上传Logo</a></li> 
+    <li class="selected"><a href="<%=basePath%>user/start/headphoto" target="tabFrame">上传Logo</a></li> 
     <li><a href="mb.html" target="tabFrame">基本信息</a></li> 
      <li><a href="#tab2" target="tabFrame">密码</a></li>
       <li><a href="<%=basePath%>headphoto" target="tabFrame">自定义</a></li>
@@ -38,7 +38,7 @@ $(function(){
     </div> 
     
     <div class="tabcontent">
-    <iframe src="<%=basePath%>headphoto" name="tabFrame" frameborder="0" scrolling="no" height="100%" width="100%"/>
+    <iframe src="<%=basePath%>user/start/headphoto" name="tabFrame" frameborder="0" scrolling="no" height="100%" width="100%"/>
     </div>
      
     </div>
