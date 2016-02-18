@@ -19,7 +19,7 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
-<title>ZTB普通用户员后台</title>
+<title>WYQ普通用户员后台</title>
 <link href="<%=basePath%>user/css/userhome.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%=basePath%>plugin/jquery/jquery-1.11.3.main.js"></script>
 <script type="text/javascript">

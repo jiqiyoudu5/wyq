@@ -17,8 +17,8 @@ public class MyMultipartResolver extends CommonsMultipartResolver {
 
 	@Override
 	public boolean isMultipart(HttpServletRequest request) {
-		//此路径不用springMvc过滤
-		if (request.getRequestURI().equals("/ZTB/file/upload")) {
+		// 此路径不用springMvc过滤
+		if (request.getRequestURI().equals("/wyq/file/upload")) {
 			return false;
 		} else {
 			return super.isMultipart(request);

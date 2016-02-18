@@ -24,7 +24,7 @@ body {
 }
 </style>
 <script type="text/javascript"
-	src="/ZTB/resources/js/jquery-1.11.3.main.js"></script>
+	src="/wyq/resources/js/jquery-1.11.3.main.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$(".content img").click(function() {
@@ -37,7 +37,7 @@ body {
 </head>
 <body>
 	<div class="content">
-		<img alt="备份数据库" src="/ZTB/resources/img/dbback.png"><br />
+		<img alt="备份数据库" src="/wyq/resources/img/dbback.png"><br />
 		点击↑图片备份
 	</div>
 </body>

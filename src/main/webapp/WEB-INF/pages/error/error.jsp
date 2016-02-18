@@ -21,7 +21,7 @@
 	<div class="w">
 		<div id="logo">
 			<!-- <a href="<%=basePath%>"><img src="<%=basePath%>resources/img/logo.png"
-				alt="ZTB" width="190" height="80"></a> --><b></b>
+				alt="WYQ" width="190" height="80"></a> --><b></b>
 		</div>
 	</div>
 	<div class="w1" id="entry">
@@ -52,9 +52,9 @@
 					rel="nofollow" target="_blank" href="#">联系我们</a>| <a rel="nofollow"
 					target="_blank" href="#">商家入驻</a>| <a rel="nofollow"
 					target="_blank" href="#">广告服务</a>| <a target="_blank" href="#">友情链接</a>|
-				<a href="#" target="_blank">ZTB</a>
+				<a href="#" target="_blank">WYQ</a>
 			</div>
-			<div class="copyright">Copyright&#169;2004-2014&nbsp;&nbsp;ZTB.com&nbsp;版权所有</div>
+			<div class="copyright">Copyright&#169;2004-2014&nbsp;&nbsp;WYQ.com&nbsp;版权所有</div>
 		</div>
 	</div>
 </body>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta content="IE=8.0000" http-equiv="X-UA-Compatible">
-<title>ZTB管理员后台</title>
+<title>WYQ管理员后台</title>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">

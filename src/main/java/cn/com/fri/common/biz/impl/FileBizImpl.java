@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-import jodd.jtx.meta.Transaction;
 import net.coobird.thumbnailator.Thumbnails;
 
 import org.apache.commons.io.FileUtils;
@@ -25,6 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -125,7 +125,7 @@ public class FileBizImpl implements IFileBiz {
 	 * @see cn.com.fri.common.biz.IFileBiz#deleteFolderById(java.lang.String)
 	 */
 	@Override
-	@Transaction
+	@Transactional
 	public String deleteFolderById(String[] ids, String savePath) {
 		String message = "0";
 		for (String id : ids) {
@@ -145,7 +145,7 @@ public class FileBizImpl implements IFileBiz {
 	 * @see cn.com.fri.common.biz.IFileBiz#deleteFolderByUrl(java.lang.String)
 	 */
 	@Override
-	@Transaction
+	@Transactional
 	public String deleteFolderByUrl(String url, String savePath) {
 		String message = deleteFolder(null, url, savePath);
 		if (message.equals("0") || message.equals("2")) {
@@ -211,7 +211,7 @@ public class FileBizImpl implements IFileBiz {
 	 * @param url
 	 * @return
 	 */
-	@Transaction
+	@Transactional
 	private String deleteDirectory(File file) {
 		String message = "0";
 

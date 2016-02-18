@@ -1,9 +1,11 @@
-package cn.com.fri.JUnitTest.base;
+package cn.com.fri.base;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.com.fri.basic.controller.BaseController;
 
@@ -11,14 +13,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * JUnitBase Biz层测试
- * 
  * @author WYQ
  * 
+ * @date 2016-2-18 上午10:49:44
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath*:config/applicationContext*.xml" })
-public class JUnitBaseBiz extends BaseController {
+@ContextConfiguration(locations = { "classpath*:applicationContext*.xml" })
+@TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
+@Transactional
+public abstract class JUnitTestBase extends BaseController {
+
 	private ObjectMapper mapper;
 
 	@Before
@@ -34,4 +38,5 @@ public class JUnitBaseBiz extends BaseController {
 			e.printStackTrace();
 		}
 	}
+
 }

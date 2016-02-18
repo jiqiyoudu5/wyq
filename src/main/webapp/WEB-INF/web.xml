@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
-	<display-name>ZTB</display-name>
+	<display-name>wyq</display-name>
 	<welcome-file-list>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
@@ -20,7 +20,7 @@
   
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
-		<param-value>classpath:config/log4j.properties</param-value>
+		<param-value>classpath:log4j.properties</param-value>
 	</context-param>
 	<context-param>
 		<param-name>log4jRefreshInterval</param-name>
@@ -33,8 +33,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-				classpath:config/applicationContext-core.xml,
-				classpath:config/applicationContext-security.xml
+				classpath:applicationContext-core.xml,
+				classpath:applicationContext-security.xml
 		</param-value>
 	</context-param>
 	
@@ -53,7 +53,7 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				classpath:config/applicationContext-servlet.xml
+				classpath:applicationContext-servlet.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
